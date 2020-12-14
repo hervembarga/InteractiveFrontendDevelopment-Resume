@@ -36,6 +36,8 @@ function repoInformtionHTML(repos){
 }
 
 function fetchGitHubInformation(event){
+    $('#gh-user-data').html("");
+    $('#gh-repo-data').html("");
     let username = $('#gh-username').val();
     if(!username){
         $('#gh-user-data').html(`<h2>Please enter a GitHub username</h2>`);
@@ -53,7 +55,7 @@ function fetchGitHubInformation(event){
             let userData = firstResponse[0] ;
             let repoData = secondResponse[0] ;
             $('#gh-user-data').html(userInformtionHTML(userData));
-            $('#gh-user-data').html(repoInformtionHTML(repoData));
+            $('#gh-repo-data').html(repoInformtionHTML(repoData));
         } , function(errorResponse){
             if (errorResponse===404){
                 $('#gh-user-data').html(`<h2>No found info for user ${username}</h2>`);
@@ -63,3 +65,5 @@ function fetchGitHubInformation(event){
             }
         });
 }
+
+$(document).ready(fetchGitHubInformation);
